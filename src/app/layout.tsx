@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { MainLayout } from "@/components/templates";
 import { ToastProvider } from "@/context";
-import { InitializeToast, Toast } from "@/components";
+import { InitializeToast, Loading, Toast } from "@/components";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,11 +18,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <ToastProvider>
-          <InitializeToast />
-          <MainLayout>{children}</MainLayout>
-          <Toast />
-        </ToastProvider>
+        <Suspense fallback={<Loading size="lg" />}>
+          <ToastProvider>
+            <InitializeToast />
+            <MainLayout>{children}</MainLayout>
+            <Toast />
+          </ToastProvider>
+        </Suspense>
       </body>
     </html>
   );
