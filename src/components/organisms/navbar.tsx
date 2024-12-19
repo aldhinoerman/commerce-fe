@@ -25,7 +25,8 @@ function Navbar() {
   const handleSubmitSuccess = (data: any) => {
     alert(`Welcome, ${data.name}!`);
     store.set("username", encodeName(data.name));
-    document?.getElementById("modal-login")?.close();
+const dialog = document.getElementById("modal-login") as HTMLDialogElement;
+dialog?.close();
     window.location.reload();
   };
 
