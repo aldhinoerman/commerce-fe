@@ -29,6 +29,7 @@ function Cart({ toggleShow }: CartProps) {
     <Drawer id="cart" toggle={toggleShow} position="right">
       <div>
         {!username ? (
+<>
           <div>
             <p>Please login to view cart list</p>
             <button
@@ -41,6 +42,7 @@ dialog?.showModal();
               Login
             </button>
           </div>
+</>
         ) : (
           <>
             {cart?.data && cart?.data?.length > 0 ? (
