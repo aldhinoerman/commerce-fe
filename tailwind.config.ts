@@ -8,7 +8,12 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        gray: "#F0F0F0",
+        peach: "#F2F0F1",
+      },
+    },
   },
   plugins: [require("daisyui")],
   daisyui: {

@@ -65,10 +65,24 @@ function formatCurrency(
   }).format(number);
 }
 
+const encodeName = (name: string) => {
+  return btoa(name);
+};
+
+const decodeUUID = (uuid: string) => {
+  try {
+    return atob(uuid);
+  } catch {
+    return "Invalid UUID";
+  }
+};
+
 export {
   cleanObject,
   toast,
   useInitializeToast,
   objectToFormData,
   formatCurrency,
+  encodeName,
+  decodeUUID,
 };

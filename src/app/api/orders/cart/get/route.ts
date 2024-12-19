@@ -4,28 +4,21 @@ import { request } from "@/utils";
 
 export async function GET(req: Request) {
   const url = new URL(req.url);
-  const page = url.searchParams.get("page");
-  const id = url.searchParams.get("id");
+  const username = url.searchParams.get("username");
 
   try {
-    let response;
-
-    if (id) {
-      response = await request.get(`products/${id}`);
-    } else {
-      response = await request.get("products", {
-        params: { page },
-      });
-    }
+    const response = await request.get("orders/cart", {
+      params: { username },
+    });
 
     return NextResponse.json(response.data);
   } catch (error: any) {
     console.error(
-      "Error fetching products:",
+      "Error fetching cart:",
       error.response?.data || error.message
     );
     return NextResponse.json(
-      { message: "Failed to fetch products" },
+      { message: "Failed to fetch cart" },
       { status: error.response?.status || 500 }
     );
   }
