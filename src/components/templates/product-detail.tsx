@@ -50,7 +50,8 @@ function ProductDetail({ product, slug }: ProductDetailProps) {
   const handleSubmitSuccess = (data: any) => {
     alert(`Welcome, ${data.name}!`);
     store.set("username", encodeName(data.name));
-    document?.getElementById("modal-login")?.close();
+const dialog = document.getElementById("modal-login") as HTMLDialogElement;
+dialog?.close();
     window.location.reload();
   };
 
@@ -137,9 +138,10 @@ function ProductDetail({ product, slug }: ProductDetailProps) {
                 ) : (
                   <button
                     className="btn btn-primary"
-                    onClick={() =>
-                      document?.getElementById("modal-login")?.showModal()
-                    }
+                    onClick={() => {
+const dialog = document.getElementById("modal-login") as HTMLDialogElement;
+dialog?.showModal();
+}}
                   >
                     Login to Buy
                   </button>
