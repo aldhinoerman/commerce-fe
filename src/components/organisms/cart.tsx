@@ -25,6 +25,7 @@ function Cart({ toggleShow }: CartProps) {
   }, [getCart]);
 
   return (
+<>
     <Drawer id="cart" toggle={toggleShow} position="right">
       <div>
         {!username ? (
@@ -58,6 +59,7 @@ dialog?.showModal();
         )}
       </div>
     </Drawer>
+</>
   );
 }
 
