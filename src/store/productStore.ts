@@ -8,7 +8,7 @@ interface ProductStore {
   loading: boolean;
   error: string | null;
   message: string;
-  fetchProducts: (page?: number) => Promise<void>;
+  fetchProducts: (page?: number, limit?: number) => Promise<void>;
   fetchCategories: (page?: number, limit?: number) => Promise<void>;
   createCategory: (data?: any) => Promise<void>;
   updateCategory: (data?: any) => Promise<void>;

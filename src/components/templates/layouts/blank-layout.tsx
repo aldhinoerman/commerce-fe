@@ -1,7 +1,8 @@
+"use client"
 import React from "react";
 
 function BlankLayout({ children }: React.PropsWithChildren) {
-  return <div>{children}</div>;
+  return <main>{children}</main>;
 }
 
 export default BlankLayout;

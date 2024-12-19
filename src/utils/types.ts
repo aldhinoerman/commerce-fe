@@ -18,11 +18,11 @@ interface ICategory {
 interface IVariant {
   id?: number;
   name?: string;
-  description?: string
-  price?: number
-  stock?: number
-  sku?: string
-  image?: string
+  description?: string;
+  price?: number;
+  stock?: number;
+  sku?: string;
+  image?: string;
 }
 
 interface IProduct {
@@ -30,7 +30,15 @@ interface IProduct {
   title: string;
   description: string;
   categoryId: number;
+  category: ICategory;
   variants: IVariant[];
+}
+
+interface ICart {
+  id: number;
+  quantity: number;
+  username: string;
+  variant: IVariant;
 }
 
 interface IRequest<T> {
@@ -38,8 +46,17 @@ interface IRequest<T> {
   pagination: {
     page: number;
     limit: number;
+    total: number;
     totalPages: number;
   };
 }
 
-export type { LoginFormInput, INav, IRequest, ICategory, IProduct };
+export type {
+  LoginFormInput,
+  INav,
+  IRequest,
+  ICategory,
+  IProduct,
+  IVariant,
+  ICart,
+};

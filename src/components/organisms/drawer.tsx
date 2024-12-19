@@ -3,12 +3,12 @@ import React from "react";
 interface DrawerProps extends React.PropsWithChildren {
   id: string;
   toggle: React.ReactNode;
-  position: "left" | "right";
+  position?: "left" | "right";
 }
 
 function Drawer({ id, toggle, position, children }: DrawerProps) {
   return (
-    <div className={`${position === "right" ? "drawer-end" : ""}`}>
+    <div className={`${position && position === "right" ? "drawer-end" : ""}`}>
       <input id={id} type="checkbox" className="drawer-toggle" />
       <div>{toggle}</div>
 

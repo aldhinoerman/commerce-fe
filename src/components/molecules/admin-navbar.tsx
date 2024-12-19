@@ -8,19 +8,19 @@ interface AdminNavbarProps {
 
 function AdminNavbar({ onLogout }: AdminNavbarProps) {
   return (
-    <div className="navbar sticky top-0 z-20 bg-white">
+    <header className="navbar sticky top-0 z-20 bg-white">
       <Hamburger />
-      <div className="flex-1">
+      <nav className="flex-1">
         <Link href={"/admin/dashboard"} className="btn btn-ghost text-xl">
           Commerce
         </Link>
-      </div>
+      </nav>
       <div className="flex-none">
         <button className="btn btn-square btn-ghost" onClick={onLogout}>
           Logout
         </button>
       </div>
-    </div>
+    </header>
   );
 }
 

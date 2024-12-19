@@ -1,0 +1,9 @@
+{
+  "name": "Commerce",
+  "short_name": "Commerce",
+  "description": "An example Next.js application with a web app manifest.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000"
+}
