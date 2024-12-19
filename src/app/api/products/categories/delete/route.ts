@@ -14,7 +14,7 @@ export async function DELETE(req: Request) {
   }
 
   try {
-    const response = await request.delete(`products/categories/${id}`, {
+    const response = await request.delete(`categories/${id}`, {
       headers: {
         Authorization: `Bearer ${authToken}`,
       },

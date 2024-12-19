@@ -1,5 +1,5 @@
 "use client";
-import { Hero, Products } from "@/components";
+import { Footer, Header, Hero, MainLayout, Products } from "@/components";
 import { useProductStore } from "@/store";
 import { useEffect, useState } from "react";
 
@@ -20,13 +20,17 @@ export default function Home() {
 
   return (
     <>
-      <Hero />
-      <Products
-        products={products?.data || []}
-        loading={loading}
-        pagination={{ total: Number(products?.pagination?.total ?? 0) }}
-        onLoadMore={handleLoadMore}
-      />
+      <Header />
+      <MainLayout>
+        <Hero />
+        <Products
+          products={products?.data || []}
+          loading={loading}
+          pagination={{ total: Number(products?.pagination?.total ?? 0) }}
+          onLoadMore={handleLoadMore}
+        />
+      </MainLayout>
+      <Footer />
     </>
   );
 }

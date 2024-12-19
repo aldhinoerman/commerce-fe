@@ -8,7 +8,7 @@ export async function GET(req: Request) {
   const limit = url.searchParams.get("limit");
 
   try {
-    const response = await request.get("products/categories", {
+    const response = await request.get("categories", {
       params: {
         page: page && typeof page === "number" ? page : 1,
         limit: limit && typeof limit === "number" ? limit : 10,

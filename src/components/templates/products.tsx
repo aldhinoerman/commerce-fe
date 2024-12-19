@@ -19,8 +19,6 @@ function Products({
   pagination,
   onLoadMore,
 }: ProductsProps) {
-  console.log("product", products);
-
   return (
     <SectionWrapper id="products">
       <div className="w-full">
