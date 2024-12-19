@@ -32,9 +32,10 @@ function Cart({ toggleShow }: CartProps) {
             <p>Please login to view cart list</p>
             <button
               className="btn btn-primary mt-8"
-              onClick={() =>
-                document?.getElementById("modal-login") as HTMLDialogElement?.showModal()
-              }
+              onClick={() => {
+const dialog = document.getElementById("modal-login") as HTMLDialogElement;
+dialog?.showModal();
+}}
             >
               Login
             </button>
