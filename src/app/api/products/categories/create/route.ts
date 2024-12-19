@@ -14,7 +14,7 @@ export async function POST(req: Request) {
   }
 
   try {
-    const response = await request.post("products/categories", data, {
+    const response = await request.post("categories", data, {
       headers: {
         Authorization: `Bearer ${authToken}`,
         "Content-Type": "multipart/form-data",

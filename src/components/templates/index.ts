@@ -7,3 +7,4 @@ export { default as Header } from "./header";
 export { default as Hero } from "./hero";
 export { default as Products } from "./products";
 export { default as ProductDetail } from "./product-detail";
+export { default as Footer } from "./footer";

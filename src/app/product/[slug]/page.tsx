@@ -30,7 +30,11 @@ async function ProductPage({ params }: any) {
     return console.error(error);
   }
 
-  return <ProductDetail product={product.data} slug={slug} />;
+  return (
+    <div className="flex justify-center">
+      <ProductDetail product={product.data} slug={slug} />
+    </div>
+  );
 }
 
 export async function generateMetadata({ params }: any) {
@@ -49,8 +53,8 @@ export async function generateMetadata({ params }: any) {
   const product = await getProductById(Number(id));
 
   return {
-    title: `${product?.title || "Commerce"}`,
-    description: product.description,
+    title: `${product?.data?.title || "Commerce"}`,
+    description: product?.data?.description,
   };
 }
 

@@ -4,7 +4,6 @@ import { request } from "@/utils";
 
 export async function PATCH(req: Request) {
   const data = await req.json();
-console.log('data', data);
 
   try {
     const response = await request.patch("orders/cart", data);

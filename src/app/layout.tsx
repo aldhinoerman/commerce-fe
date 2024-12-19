@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Header, MainLayout } from "@/components/templates";
 import { ToastProvider } from "@/context";
 import { InitializeToast, Loading, Toast } from "@/components";
 import { Suspense } from "react";
-import Footer from "@/components/templates/footer";
 
 export const metadata: Metadata = {
   title: "Commerce",
@@ -23,9 +21,7 @@ export default function RootLayout({
         <Suspense fallback={<Loading size="lg" />}>
           <ToastProvider>
             <InitializeToast />
-            <Header />
-            <MainLayout>{children}</MainLayout>
-            <Footer />
+            {children}
             <Toast />
           </ToastProvider>
         </Suspense>

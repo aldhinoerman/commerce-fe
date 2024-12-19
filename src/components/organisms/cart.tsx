@@ -1,4 +1,3 @@
-/* eslint-disable */
 "use client";
 import React, { useCallback, useEffect } from "react";
 import Drawer from "./drawer";
@@ -25,43 +24,45 @@ function Cart({ toggleShow }: CartProps) {
   }, [getCart]);
 
   return (
-<>
-    <Drawer id="cart" toggle={toggleShow} position="right">
-      <div>
-        {!username ? (
-<>
-          <div>
-            <p>Please login to view cart list</p>
-            <button
-              className="btn btn-primary mt-8"
-              onClick={() => {
-const dialog = document.getElementById("modal-login") as HTMLDialogElement;
-dialog?.showModal();
-}}
-            >
-              Login
-            </button>
-          </div>
-</>
-        ) : (
-          <>
-            {cart?.data && cart?.data?.length > 0 ? (
-              <>
-                {cart.data.map((obj, idx) => (
-                  <CartItem data={obj} key={idx} />
-                ))}
-                <div>
-                  <button className="btn btn-primary">Checkout</button>
-                </div>
-              </>
-            ) : (
-              <p>Empty Cart</p>
-            )}
-          </>
-        )}
-      </div>
-    </Drawer>
-</>
+    <>
+      <Drawer id="cart" toggle={toggleShow} position="right">
+        <div>
+          {!username ? (
+            <>
+              <div>
+                <p>Please login to view cart list</p>
+                <button
+                  className="btn btn-primary mt-8"
+                  onClick={() => {
+                    const dialog = document.getElementById(
+                      "modal-login"
+                    ) as HTMLDialogElement;
+                    dialog?.showModal();
+                  }}
+                >
+                  Login
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              {cart?.data && cart?.data?.length > 0 ? (
+                <>
+                  {cart.data.map((obj, idx) => (
+                    <CartItem data={obj} key={idx} />
+                  ))}
+                  <div>
+                    <button className="btn btn-primary">Checkout</button>
+                  </div>
+                </>
+              ) : (
+                <p>Empty Cart</p>
+              )}
+            </>
+          )}
+        </div>
+      </Drawer>
+    </>
   );
 }
 

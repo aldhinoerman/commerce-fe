@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import { formatCurrency, ICart } from "@/utils";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
@@ -30,7 +31,6 @@ function CartItem({ data }: CartItemProps) {
           quantity: newQuantity,
         };
         await updateCart(dataSubmit);
-        console.log(`Quantity updated to ${newQuantity}`);
       } catch (error) {
         console.error("Failed to update quantity:", error);
       }

@@ -14,7 +14,7 @@ export async function PATCH(req: Request) {
   }
 
   try {
-    const response = await request.patch("products/categories", data, {
+    const response = await request.patch("categories", data, {
       headers: {
         Authorization: `Bearer ${authToken}`,
         "Content-Type": "multipart/form-data",
