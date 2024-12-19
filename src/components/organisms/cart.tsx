@@ -33,7 +33,7 @@ function Cart({ toggleShow }: CartProps) {
             <button
               className="btn btn-primary mt-8"
               onClick={() =>
-                document?.getElementById("modal-login")?.showModal()
+                document?.getElementById("modal-login") as HTMLDialogElement?.showModal()
               }
             >
               Login
