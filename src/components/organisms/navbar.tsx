@@ -50,14 +50,17 @@ function Navbar() {
                 Hi, {decodedUsername}
               </button>
             ) : (
+<>
               <button
                 className="btn btn-ghost"
-                onClick={() =>
-                  document?.getElementById("modal-login")?.showModal()
-                }
+                              onClick={() => {
+const dialog = document.getElementById("modal-login") as HTMLDialogElement;
+dialog?.showModal();
+}}
               >
                 Login
               </button>
+</>
             )}
             <Cart
               toggleShow={
