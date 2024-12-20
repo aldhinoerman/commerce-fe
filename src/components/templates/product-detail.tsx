@@ -18,7 +18,7 @@ interface ProductDetailProps {
 }
 
 function ProductDetail({ product, slug }: ProductDetailProps) {
-  const { addCart } = useOrderStore();
+  const { addCart, checkout, loading } = useOrderStore();
   const username = store.get("username");
   const [variant, setVariant] = useState<IVariant | null>(null);
   const [qty, setQty] = useState<number | undefined>(1);
@@ -55,13 +55,26 @@ function ProductDetail({ product, slug }: ProductDetailProps) {
     window.location.reload();
   };
 
-  const handleAddCart = async () => {
+  const handleAddCart = async (isCheckout?: boolean) => {
     if (variant) {
       await addCart({
         username,
         variantId: variant.id,
         quantity: qty,
       });
+
+      if (isCheckout) {
+        await checkout();
+        window.location.href = `/product/${slug}/payment`;
+      }
+    }
+  };
+
+  const handleBuy = async () => {
+    try {
+      await handleAddCart(true);
+    } catch (error) {
+      console.error("Failed to buy item:", error);
     }
   };
 
@@ -111,7 +124,7 @@ function ProductDetail({ product, slug }: ProductDetailProps) {
                         <label
                           htmlFor="cart"
                           className="btn btn-primary"
-                          onClick={handleAddCart}
+                          onClick={() => !loading && handleAddCart(false)}
                         >
                           <ShoppingCartIcon className="w-6 h-6" /> Add to Cart
                         </label>
@@ -120,7 +133,7 @@ function ProductDetail({ product, slug }: ProductDetailProps) {
                     <button
                       className="btn btn-circle"
                       onClick={handleDecrease}
-                      disabled={Boolean(qty === 1)}
+                      disabled={Boolean(qty === 1) || loading}
                     >
                       <MinusIcon className="w-6 h-6" />
                     </button>
@@ -128,11 +141,17 @@ function ProductDetail({ product, slug }: ProductDetailProps) {
                     <button
                       className="btn btn-circle"
                       onClick={handleIncrease}
-                      disabled={Boolean(qty === variant.stock)}
+                      disabled={Boolean(qty === variant.stock) || loading}
                     >
                       <PlusIcon className="w-6 h-6" />
                     </button>
-                    <button className="btn btn-primary">Buy Now</button>
+                    <button
+                      className="btn btn-primary"
+                      onClick={handleBuy}
+                      disabled={loading}
+                    >
+                      Buy Now
+                    </button>
                   </>
                 ) : (
                   <button

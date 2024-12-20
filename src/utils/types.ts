@@ -41,6 +41,12 @@ interface ICart {
   variant: IVariant;
 }
 
+interface IOrder {
+  id: number;
+  status: string;
+  totalPrice: number;
+}
+
 interface IRequest<T> {
   data: T[];
   pagination: {
@@ -59,4 +65,5 @@ export type {
   IProduct,
   IVariant,
   ICart,
+  IOrder,
 };

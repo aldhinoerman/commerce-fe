@@ -7,6 +7,7 @@ import LoginModal from "./login-user";
 import { decodeUUID, encodeName } from "@/utils";
 import store from "store";
 import Cart from "./cart";
+import { CurrencyDollarIcon } from "@heroicons/react/24/outline";
 
 function Navbar() {
   const [decodedUsername, setDecodedUsername] = useState("");
@@ -25,8 +26,8 @@ function Navbar() {
   const handleSubmitSuccess = (data: any) => {
     alert(`Welcome, ${data.name}!`);
     store.set("username", encodeName(data.name));
-const dialog = document.getElementById("modal-login") as HTMLDialogElement;
-dialog?.close();
+    const dialog = document.getElementById("modal-login") as HTMLDialogElement;
+    dialog?.close();
     window.location.reload();
   };
 
@@ -51,18 +52,25 @@ dialog?.close();
                 Hi, {decodedUsername}
               </button>
             ) : (
-<>
-              <button
-                className="btn btn-ghost"
-                              onClick={() => {
-const dialog = document.getElementById("modal-login") as HTMLDialogElement;
-dialog?.showModal();
-}}
-              >
-                Login
-              </button>
-</>
+              <>
+                <button
+                  className="btn btn-ghost"
+                  onClick={() => {
+                    const dialog = document.getElementById(
+                      "modal-login"
+                    ) as HTMLDialogElement;
+                    dialog?.showModal();
+                  }}
+                >
+                  Login
+                </button>
+              </>
             )}
+            <div>
+              <Link href={"/product/payment"} prefetch className="btn btn-primary">
+                <CurrencyDollarIcon className="w-6 h-6" />
+              </Link>
+            </div>
             <Cart
               toggleShow={
                 <label htmlFor="cart" className="btn btn-primary">
