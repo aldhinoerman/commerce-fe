@@ -1,8 +1,9 @@
+import { OrderList } from '@/components'
 import React from 'react'
 
 function OrderPage() {
   return (
-    <div>OrderPage</div>
+    <OrderList />
   )
 }
 

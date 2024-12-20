@@ -12,7 +12,7 @@ import {
   PlusIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import { Drawer, Table } from "../organisms";
+import { Drawer, ModalStock, Table } from "../organisms";
 import { formatCurrency, IProduct, objectToFormData, toast } from "@/utils";
 import { useFieldArray, useForm } from "react-hook-form";
 import Image from "next/image";
@@ -266,28 +266,32 @@ function ProductList() {
                     )}
                   </div>
 
-                  <div className="mb-4">
-                    <label className="block text-sm font-medium mb-2">
-                      Stock
-                    </label>
+                  {!initialData && (
+                    <div className="mb-4">
+                      <label className="block text-sm font-medium mb-2">
+                        Stock
+                      </label>
 
-                    <input
-                      type="number"
-                      min={0}
-                      defaultValue={1}
-                      className={`input input-bordered w-full ${
-                        errors?.variants?.[index]?.stock ? "border-red-500" : ""
-                      }`}
-                      {...register(`variants.${index}.stock`, {
-                        required: "Stock is required",
-                      })}
-                    />
-                    {errors?.variants?.[index]?.stock && (
-                      <p className="text-red-500 text-sm">
-                        {errors?.variants[index]?.stock?.message}
-                      </p>
-                    )}
-                  </div>
+                      <input
+                        type="number"
+                        min={0}
+                        defaultValue={1}
+                        className={`input input-bordered w-full ${
+                          errors?.variants?.[index]?.stock
+                            ? "border-red-500"
+                            : ""
+                        }`}
+                        {...register(`variants.${index}.stock`, {
+                          required: "Stock is required",
+                        })}
+                      />
+                      {errors?.variants?.[index]?.stock && (
+                        <p className="text-red-500 text-sm">
+                          {errors?.variants[index]?.stock?.message}
+                        </p>
+                      )}
+                    </div>
+                  )}
 
                   <div className="mb-4">
                     <label className="block text-sm font-medium mb-2">
@@ -437,7 +441,7 @@ function ProductList() {
                       <h4 className="font-bold">Variants</h4>
                       {res?.variants?.length > 0 &&
                         res.variants.map((v: any, index: number) => (
-                          <div key={index} className="mb-4">
+                          <div key={index} className="mb-4 flex flex-col gap-4">
                             <p>
                               {index + 1}. {v.name}{" "}
                               <span className="text-bold">{v.sku}</span>
@@ -450,9 +454,22 @@ function ProductList() {
                             </p>
                             <p>Stock: {v?.stock ?? "0"}</p>
 
-                            <button className="btn btn-primary btn-xs">
+                            <label
+                              htmlFor={`stock-opname-${v.id}`}
+                              className="btn btn-primary btn-xs"
+                              onClick={() => {
+                                const dialog = document.getElementById(
+                                  `stock-opname-${v.id}`
+                                ) as HTMLDialogElement;
+
+                                if (dialog) {
+                                  dialog?.showModal();
+                                }
+                              }}
+                            >
                               Stock Opname
-                            </button>
+                            </label>
+                            <ModalStock data={v} />
                           </div>
                         ))}
                     </div>
@@ -471,7 +488,6 @@ function ProductList() {
                     </label>
                   }
                 >
-                  Test2
                   <FormProduct initialData={res} />
                 </Drawer>
 

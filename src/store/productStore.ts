@@ -16,6 +16,7 @@ interface ProductStore {
   createProduct: (data?: any) => Promise<void>;
   updateProduct: (data?: any) => Promise<void>;
   deleteProduct: (id: number) => Promise<void>;
+  adjustStock: (data: any) => Promise<void>;
 }
 
 export const useProductStore = create<ProductStore>((set, get) => ({
@@ -196,6 +197,25 @@ export const useProductStore = create<ProductStore>((set, get) => ({
       }
 
       set({ loading: false, message: "Success delete product" });
+    } catch (error: any) {
+      set({ error: error.message, loading: false });
+    }
+  },
+
+  adjustStock: async (data: any) => {
+    set({ loading: true, error: null });
+
+    try {
+      const res = await apiRoute.post("products/stock-opname", data);
+      if (!res) {
+        throw new Error("Failed to create product");
+      }
+
+      if (res?.status === 200 || res?.status === 201) {
+        await get().fetchProducts();
+      }
+
+      set({ loading: false, message: "Success update stock" });
     } catch (error: any) {
       set({ error: error.message, loading: false });
     }

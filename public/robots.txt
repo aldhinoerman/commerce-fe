@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: http://localhost:8080
+Host: https://commerce-fe-alpha.vercel.app
 
 # Sitemaps
-Sitemap: http://localhost:8080/sitemap.xml
+Sitemap: https://commerce-fe-alpha.vercel.app/sitemap.xml
