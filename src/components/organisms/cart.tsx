@@ -3,25 +3,32 @@ import React, { useCallback, useEffect } from "react";
 import Drawer from "./drawer";
 import store from "store";
 import { useOrderStore } from "@/store";
-import { CartItem } from "../molecules";
+import { CartItem, Loading } from "../molecules";
 
 interface CartProps {
   toggleShow: React.ReactNode;
 }
 
 function Cart({ toggleShow }: CartProps) {
-  const { fetchCart, cart } = useOrderStore();
   const username = store.get("username");
+  const { fetchCart, checkout, loading, cart } = useOrderStore();
 
   const getCart = useCallback(() => {
-    if (username) {
-      fetchCart(username);
-    }
-  }, [fetchCart, username]);
+    fetchCart();
+  }, [fetchCart]);
 
   useEffect(() => {
     getCart();
   }, [getCart]);
+
+  const handleCheckout = async () => {
+    try {
+      await checkout();
+      window.location.href = `/product/payment`;
+    } catch (error) {
+      console.error("Failed to create checkout:", error);
+    }
+  };
 
   return (
     <>
@@ -52,9 +59,17 @@ function Cart({ toggleShow }: CartProps) {
                     <CartItem data={obj} key={idx} />
                   ))}
                   <div>
-                    <button className="btn btn-primary">Checkout</button>
+                    <button
+                      className="btn btn-primary"
+                      onClick={handleCheckout}
+                      disabled={loading}
+                    >
+                      Checkout
+                    </button>
                   </div>
                 </>
+              ) : loading ? (
+                <Loading size="lg" />
               ) : (
                 <p>Empty Cart</p>
               )}

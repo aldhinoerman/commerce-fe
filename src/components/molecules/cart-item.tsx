@@ -12,7 +12,7 @@ interface CartItemProps {
 }
 
 function CartItem({ data }: CartItemProps) {
-  const { updateCart } = useOrderStore();
+  const { updateCart, deleteCart } = useOrderStore();
   const [quantity, setQuantity] = useState(1);
   const username = store.get("username");
 
@@ -27,7 +27,7 @@ function CartItem({ data }: CartItemProps) {
       try {
         const dataSubmit = {
           username,
-          variantId: data.id,
+          variantId: data.variant.id,
           quantity: newQuantity,
         };
         await updateCart(dataSubmit);
@@ -43,7 +43,18 @@ function CartItem({ data }: CartItemProps) {
     updateQuantity(newQuantity);
   };
 
-  const handleRemove = () => {};
+  const handleRemove = async () => {
+    try {
+      const dataSubmit = {
+        username,
+        variantId: data.variant.id,
+      };
+      await deleteCart(dataSubmit);
+    } catch (error) {
+      console.error("Failed to delete item:", error);
+    }
+  };
+
   return (
     data && (
       <div className="mb-4 text-center">

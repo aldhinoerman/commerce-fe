@@ -23,7 +23,7 @@ function DashboardDrawer({ children, toggle, items }: DashboardDrawerProps) {
           <ul className="menu bg-white text-base-content min-h-full w-80 p-4">
             {items.map((obj, idx) => (
               <li key={idx}>
-                <Link href={obj.link}>{obj.label}</Link>
+                <Link href={obj.link} prefetch>{obj.label}</Link>
               </li>
             ))}
           </ul>
