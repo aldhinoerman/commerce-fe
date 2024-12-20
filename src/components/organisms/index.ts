@@ -5,3 +5,5 @@ export { default as Navbar } from "./navbar";
 export { default as ProductCard } from "./product-card";
 export { default as LoginModal } from "./login-user";
 export { default as Cart } from "./cart";
+export { default as Modal } from "./modal";
+export { default as ModalStock } from "./modal-stock";

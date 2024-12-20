@@ -19,6 +19,12 @@ interface TableProps {
   onPageChange: (page: number) => void;
 }
 
+const COLUMN_ALIGN: any = {
+  right: "text-right",
+  center: "text-center",
+  left: "text-left",
+};
+
 export default function Table({
   columns,
   data,
@@ -46,7 +52,7 @@ export default function Table({
                   <th
                     key={column.key}
                     className={`border border-gray-300 px-4 py-2 ${
-                      column.align ? `text-${column.align}` : "text-left"
+                      column.align ? COLUMN_ALIGN[column.align] : "text-left"
                     }`}
                   >
                     {column.title}
@@ -65,7 +71,9 @@ export default function Table({
                       <td
                         key={column.key}
                         className={`border border-gray-300 px-4 py-2 ${
-                          column.align ? `text-${column.align}` : "text-left"
+                          column.align
+                            ? COLUMN_ALIGN[column.align]
+                            : "text-left"
                         }`}
                       >
                         {column.render

@@ -47,6 +47,12 @@ interface IOrder {
   totalPrice: number;
 }
 
+interface IStock {
+  id: number;
+  adjustment: number;
+  reason: string;
+}
+
 interface IRequest<T> {
   data: T[];
   pagination: {
@@ -66,4 +72,5 @@ export type {
   IVariant,
   ICart,
   IOrder,
+  IStock,
 };
